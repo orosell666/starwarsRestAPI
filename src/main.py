@@ -44,7 +44,7 @@ def get_all_people():
     return jsonify({"response": people_serialized}), 200
 
 #obtener un personaje
-@app.route('people/<int:people_id>', methods=['GET'])
+@app.route('/people/<int:people_id>', methods=['GET'])
 def get_single_people(people_id):
     people = People.get_by_id(people_id)
     if people:
@@ -75,7 +75,7 @@ def get_favorites_by_user(id):
     return jsonify({"favorites": list(map(lambda favorite: favorite.serialize(), favorites))})
 
 #obtener todos los planetas
-@app.route('planet', methods=['GET'])
+@app.route('/planet', methods=['GET'])
 def get_all_planets():
     planet = Planet.query.all()
     planet_serialized = list(map(lambda planet: planet.serialize(), planet))
@@ -91,7 +91,7 @@ def get_single_planet(planet_id):
         return jsonify({"error": "no encontrado"}), 401
 
 #obtener planetas favoritos
-@app.route('favorite/<int:user_id>/planet/<int:planet_id>', methods = ['POST'])
+@app.route('/favorite/<int:user_id>/planet/<int:planet_id>', methods = ['POST'])
 def post_favorites_by_planet(user_id, planet_id):
     favorite = Favorite(user_id, planet_id)
     db.session.add(favorite)
@@ -99,7 +99,7 @@ def post_favorites_by_planet(user_id, planet_id):
     return jsonify({"response": favorite.serialize()})
 
 #eliminar planeta favorito
-@app.route('favorite/<int:user_id>/planet/<int:planet_id>', methods = ['DELETE'])
+@app.route('/favorite/<int:user_id>/planet/<int:planet_id>', methods = ['DELETE'])
 def delete_favorite_planet(user_id, planet_id):
     favorite = Favorite.query.filter_by(planet_id=planet_id).filter_by(user_id= user_id).first()
     db.session.delete(favorite)
