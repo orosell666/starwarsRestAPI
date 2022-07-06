@@ -26,6 +26,7 @@ class People(db.Model):
     def serialize(self):
         return {
             "name" : self.name,
+            "id": self.id
         }
 
 class Favorite(db.Model):

@@ -44,7 +44,7 @@ def get_all_people():
     return jsonify({"response": people_serialized}), 200
 
 #obtener un personaje
-@app.route('people/<int:people_id', methods=[GET])
+@app.route('people/<int:people_id>', methods=['GET'])
 def get_single_people(people_id):
     people = People.get_by_id(people_id)
     if people:
